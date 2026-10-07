@@ -1,0 +1,70 @@
+{
+  "version": 8,
+  "name": "Oscal Minimal Black",
+  "glyphs": "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+  "sources": {
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://tiles.openfreemap.org/planet"
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": { "background-color": "#090909" }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "water",
+      "paint": { "fill-color": "#101010" }
+    },
+    {
+      "id": "streets",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "filter": ["match", ["get", "class"], ["motorway", "trunk", "primary", "secondary", "tertiary", "minor", "service"], true, false],
+      "layout": { "line-cap": "round", "line-join": "round" },
+      "paint": {
+        "line-color": "#303030",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.5, 14, 1.2, 17, 3, 19, 7]
+      }
+    },
+    {
+      "id": "main-streets",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "filter": ["match", ["get", "class"], ["motorway", "trunk", "primary", "secondary"], true, false],
+      "layout": { "line-cap": "round", "line-join": "round" },
+      "paint": {
+        "line-color": "#444444",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.8, 14, 1.8, 17, 4, 19, 9]
+      }
+    },
+    {
+      "id": "street-names",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "transportation_name",
+      "minzoom": 14,
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": 500,
+        "text-field": ["coalesce", ["get", "name:latin"], ["get", "name"]],
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 10,
+        "text-letter-spacing": 0.08,
+        "text-max-angle": 30
+      },
+      "paint": {
+        "text-color": "#8c8c8c",
+        "text-halo-color": "#090909",
+        "text-halo-width": 2
+      }
+    }
+  ]
+}
