@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import Navbar from './components/Navbar'
 import LocationMap from './components/LocationMap'
+import ScrollArrow from './components/ScrollArrow'
 import { directionsUrl } from './config/location'
 import initialLocation from './config/location.json'
 import './App.css'
@@ -25,33 +26,27 @@ function Art({ kind }: { kind: string }) {
 }
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [location, setLocation] = useState(initialLocation)
+  const location = initialLocation
   return <>
     <a className="skip-link" href="#contenido">Ir al contenido</a>
-    <div className="announcement"><div className="wrapper announcement-inner"><span>MUCHAS IDEAS. UN SOLO LUGAR.</span><a href="#contacto"><Pin /> Arenal Grande 2178, Montevideo <Arrow /></a></div></div>
-    <header className="site-header wrapper" id="inicio">
-      <a className="brand" href="#inicio" aria-label="Oscal Importaciones, inicio"><img src="/oscal-logo.svg" alt="Oscal SRL Importaciones" width="581" height="261"/></a>
-      <nav id="main-navigation" className={menuOpen ? 'open' : ''} aria-label="Navegación principal">
-        <a href="#rubros" onClick={() => setMenuOpen(false)}>Nuestros rubros</a><a href="#nosotros" onClick={() => setMenuOpen(false)}>Somos Oscal</a><a href="#contacto" onClick={() => setMenuOpen(false)}>Encontranos</a>
-        <a className="mobile-catalog" href={whatsapp()} target="_blank" rel="noreferrer">Pedí tu catálogo <Arrow /></a>
-      </nav>
-      <a className="button button-outline header-cta" href={whatsapp()} target="_blank" rel="noreferrer">Pedí tu catálogo <Arrow /></a>
-      <button className="menu-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" aria-label={menuOpen ? 'Cerrar navegación' : 'Abrir navegación'} onClick={() => setMenuOpen(!menuOpen)}><span className={menuOpen ? 'menu-lines active' : 'menu-lines'}><i /><i /></span></button>
-    </header>
+    <Navbar catalogUrl={whatsapp()} />
     <main id="contenido">
-      <section className="hero wrapper" aria-labelledby="hero-title">
-        <div className="hero-copy"><p className="eyebrow"><span className="red-dot"/> UN MUNDO DE POSIBILIDADES</p><h1 id="hero-title">Más variedad.<br/>Más ideas.<br/><span>Más Oscal.</span></h1><p className="hero-description">Todo para jugar, crear, decorar y celebrar.<br/>Descubrí nuevas ideas para tu negocio en un solo lugar.</p><div className="hero-actions"><a className="button button-red" href={whatsapp()} target="_blank" rel="noreferrer">Quiero ver el catálogo <Arrow /></a><a className="text-link" href="#rubros">Explorá los rubros <span aria-hidden="true">↓</span></a></div><div className="hero-note"><span className="note-line"/> Juguetería, bazar, escolares y cotillón.</div></div>
-        <figure className="hero-visual"><img src="/oscal-products-v2.png" alt="Composición ilustrativa con un oso de peluche, una taza, cuadernos, lápices, un auto de juguete y un gorro de fiesta" width="1254" height="1254" fetchPriority="high"/><div className="hero-sticker"><span>PARA CADA DÍA</span><strong>Siempre una<br/><em>buena idea.</em></strong><span className="sticker-star" aria-hidden="true">✳</span></div><figcaption>Pequeños objetos. Grandes posibilidades.</figcaption></figure>
+      <section className="hero" id="inicio" aria-labelledby="hero-title">
+        <img className="hero-background" src="/oscal-hero-background.jpg" alt="" width="4160" height="3120" fetchPriority="high" aria-hidden="true"/>
+        <div className="hero-copy wrapper">
+          <p className="eyebrow"><span className="red-dot"/> EN EL BARRIO DE LOS JUDÍOS</p>
+          <h1 id="hero-title">Lo que buscás<br/><em>está en</em> <span className="hero-logo"><img src="/oscal-logo.svg" alt="Oscal" width="581" height="261"/></span></h1>
+          <p className="hero-description">Juguetería · Bazar · Escolares · Cotillón</p>
+        </div>
+        <ScrollArrow />
       </section>
-      <div className="brand-strip" aria-hidden="true"><span>JUGAR</span><i>✳</i><span>CREAR</span><i>✳</i><span>DECORAR</span><i>✳</i><span>CELEBRAR</span><i>✳</i><span>IMAGINAR</span><i>✳</i></div>
       <section className="categories wrapper" id="rubros" aria-labelledby="rubros-title"><div className="section-heading"><div><p className="eyebrow">ENCONTRÁ TU PRÓXIMA IDEA</p><h2 id="rubros-title">Cuatro rubros.<br/>Infinitas posibilidades<span>.</span></h2></div><p>Para los momentos de siempre<br/>y para los que están por venir.</p></div><div className="category-grid">{categories.map((category, index) => <a className={`category-card ${category.color}`} href={whatsapp(category.name)} target="_blank" rel="noreferrer" key={category.name} aria-label={`Consultar catálogo de ${category.name} por WhatsApp`}><div className="category-top"><span className="category-number">0{index + 1}</span><span className="circle-arrow"><Arrow /></span></div><div className="category-image"><Art kind={category.art}/></div><div className="category-detail"><h3>{category.name}</h3><p>{category.description}</p><span className="category-link">Descubrí el rubro <Arrow /></span></div></a>)}</div></section>
       <section className="about wrapper" id="nosotros" aria-labelledby="about-title"><div className="about-heading"><p className="eyebrow">HOLA, SOMOS OSCAL</p><h2 id="about-title">Un solo lugar.<br/>Mucho por<br/><em>descubrir.</em></h2><span className="about-spark" aria-hidden="true">✳</span></div><div className="about-copy"><p>Nos gustan los objetos que hacen el día más divertido, la casa más linda y cada festejo más especial.</p><p>Por eso reunimos juguetes, artículos de bazar, útiles escolares y cotillón: variedad que inspira nuevas posibilidades para tu negocio.</p><a className="text-link" href="#contacto">Vení a conocernos <Arrow /></a><div className="about-signature"><img src="/oscal-logo.svg" alt="Oscal SRL Importaciones" width="581" height="261"/><span>De Montevideo,<br/>para tus próximas ideas.</span></div></div></section>
       <section className="catalog-section" id="catalogo" aria-labelledby="catalog-title"><div className="wrapper catalog-inner"><div className="catalog-copy"><p className="eyebrow">HABLEMOS DE TU PRÓXIMO PEDIDO</p><h2 id="catalog-title">Tu próxima idea<br/>empieza con un <em>hola.</em></h2><p>Pedí el catálogo por WhatsApp y consultanos por los productos que estás buscando.</p><a className="button button-red" href={whatsapp()} target="_blank" rel="noreferrer"><Chat /> Pedí tu catálogo <Arrow /></a></div><ol className="catalog-steps"><li><span>01</span><div><h3>Escribinos</h3><p>Contanos qué rubro te interesa.</p></div></li><li><span>02</span><div><h3>Descubrí el catálogo</h3><p>Conocé las opciones para tu negocio.</p></div></li><li><span>03</span><div><h3>Armá tu próxima idea</h3><p>Consultá disponibilidad y detalles de tu pedido.</p></div></li></ol></div></section>
       <section className="contact wrapper" id="contacto" aria-labelledby="contact-title">
         <div className="contact-copy"><p className="eyebrow">TE ESPERAMOS EN MONTEVIDEO</p><h2 id="contact-title">Pasá. Mirá.<br/><em>Inspirate.</em></h2><p>Estamos en Arenal Grande 2178.<br/>Vení a descubrir todo lo que tenemos para vos.</p><a className="button button-outline" href={directionsUrl(location)} target="_blank" rel="noreferrer"><Pin /> Cómo llegar <Arrow /></a></div>
         <div className="contact-panel"><div className="address-row"><span className="contact-icon"><Pin /></span><div><span className="eyebrow">ENCONTRANOS ACÁ</span><h3>Arenal Grande 2178</h3><p>Montevideo, Uruguay</p></div></div><div className="contact-divider"/><p className="eyebrow">CONVERSEMOS POR WHATSAPP</p><a className="phone-link" href={whatsapp()} target="_blank" rel="noreferrer"><span>094 471 227</span><Arrow /></a><a className="phone-link" href="https://wa.me/59893657542" target="_blank" rel="noreferrer"><span>093 657 542</span><Arrow /></a><p className="contact-note">¿Tenés algo en mente? Nos encantará ayudarte.</p></div>
-        <LocationMap position={location} onSave={setLocation} />
+        <LocationMap position={location} />
       </section>
     </main>
     <footer className="site-footer"><div className="wrapper footer-main"><a className="footer-brand" href="#inicio" aria-label="Volver al inicio"><img src="/oscal-logo.svg" alt="Oscal Importaciones" width="581" height="261"/></a><p>Pequeños objetos.<br/><strong>Grandes posibilidades.</strong></p><a className="text-link" href="#inicio">Volver arriba <span aria-hidden="true">↑</span></a></div><div className="wrapper footer-bottom"><span>© {new Date().getFullYear()} Oscal SRL Importaciones</span><span>Juguetería · Bazar · Escolares · Cotillón</span></div></footer>
