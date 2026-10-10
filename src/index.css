@@ -4,7 +4,7 @@
 @import "@fontsource-variable/fraunces/wght-italic.css";
 
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'DM Sans Variable', Arial, sans-serif;
   color: #292d4b;
   background: #f8f6ef;
   font-synthesis: none;
@@ -30,3 +30,4 @@ button, a { -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+

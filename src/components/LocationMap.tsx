@@ -85,7 +85,7 @@ export default function LocationMap({ position }: {
 
   return <div className="location-map-card">
     <div className="location-map-header">
-      <div><span className="eyebrow">ENCONTRANOS ACÁ</span><h3>Arenal Grande 2178<span>.</span></h3></div>
+      <div><span className="eyebrow">ENCONTRANOS ACÁ</span><h3>Arenal Grande 2178</h3></div>
       <span className="location-map-city">Montevideo, Uruguay</span>
     </div>
     <div className="location-map-frame">

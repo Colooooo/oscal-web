@@ -1,0 +1,10 @@
+OSCAL — 4 tarjetas preliminares para Photoshop
+
+Abrí el PSD de la propuesta elegida.
+Textos: capas de texto editables, con Arial y Georgia.
+Logo, QR, fondos y decoraciones: capas de imagen separadas.
+SVG adjuntos: originales vectoriales, para colocar como objetos inteligentes si lo necesitás.
+Tamaño: 2160 × 1200 px, equivalente a 90 × 50 mm a 609,6 ppp. Color RGB.
+QR: https://oscal-pink.vercel.app/
+Si Photoshop pide actualizar capas de texto al abrir, aceptá la actualización.
+Son propuestas preliminares sin sangrado.

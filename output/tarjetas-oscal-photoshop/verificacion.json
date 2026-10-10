@@ -1,0 +1,30 @@
+[
+  {
+    "file": "01-clasica.psd",
+    "layers": 12,
+    "editableTexts": 7,
+    "width": 2160,
+    "height": 1200
+  },
+  {
+    "file": "02-editorial.psd",
+    "layers": 15,
+    "editableTexts": 8,
+    "width": 2160,
+    "height": 1200
+  },
+  {
+    "file": "03-colorida.psd",
+    "layers": 22,
+    "editableTexts": 9,
+    "width": 2160,
+    "height": 1200
+  },
+  {
+    "file": "04-minimalista.psd",
+    "layers": 13,
+    "editableTexts": 9,
+    "width": 2160,
+    "height": 1200
+  }
+]
