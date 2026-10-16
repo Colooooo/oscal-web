@@ -3,9 +3,9 @@
 .skip-link:focus { clip-path: none; width: auto; height: auto; }
 .eyebrow { display: flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 600; letter-spacing: 1.8px; line-height: 1.7; }
 .red-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
-h2 { font-family: 'Fraunces Variable', Georgia, serif; font-size: clamp(38px, 4.3vw, 62px); font-weight: 450; line-height: 1.08; letter-spacing: -2.5px; margin-top: 20px; }
-h2 em { font-weight: 400; color: #b64349; }
-h2 > span { color: var(--red); }
+:where(main:not(.shop)) h2 { font-family: 'Fraunces Variable', Georgia, serif; font-size: clamp(38px, 4.3vw, 62px); font-weight: 450; line-height: 1.08; letter-spacing: -2.5px; margin-top: 20px; }
+:where(main:not(.shop)) h2 em { font-weight: 400; color: #b64349; }
+:where(main:not(.shop)) h2 > span { color: var(--red); }
 .arrow-icon { width: 19px; height: 19px; flex-shrink: 0; }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 24px; min-height: 55px; padding: 16px 24px; border: 1px solid transparent; border-radius: 40px; font-size: 13px; font-weight: 600; transition: background .18s, transform .18s, color .18s; }
 .button:hover { transform: translateY(-3px); }
@@ -120,7 +120,7 @@ h2 > span { color: var(--red); }
 }
 @media (max-width: 700px) {
  .wrapper { padding-inline: 24px; }
- h2 { font-size: 42px; letter-spacing: -1.7px; }
+ :where(main:not(.shop)) h2 { font-size: 42px; letter-spacing: -1.7px; }
  .hero { min-height: max(650px,100svh); padding-block: 120px 110px; }
  .hero-background { transform: scale(1.08); transform-origin: center; object-position: 62% center; filter: blur(5px); }
  .hero h1 { font-size: clamp(46px,12vw,70px); letter-spacing: -1.8px; }
@@ -166,7 +166,7 @@ h2 > span { color: var(--red); }
 }
 @media (max-width: 360px) {
  .wrapper { padding-inline: 20px; }
- h2 { font-size: 36px; }
+ :where(main:not(.shop)) h2 { font-size: 36px; }
  .category-card { padding: 20px; }
  .category-detail h3 { font-size: 25px; }
  .category-detail p { font-size: 11px; }

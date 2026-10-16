@@ -3,6 +3,7 @@
 @import "@fontsource-variable/fraunces";
 @import "@fontsource-variable/fraunces/wght-italic.css";
 
+@layer base {
 :root {
   font-family: 'DM Sans Variable', Arial, sans-serif;
   color: #292d4b;
@@ -29,5 +30,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+
 }
 

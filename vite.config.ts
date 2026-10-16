@@ -52,4 +52,4 @@ function locationEditor(): Plugin {
   }
 }
 
-export default defineConfig({ plugins: [react(), tailwindcss(), locationEditor()] })
+export default defineConfig({ plugins: [react(), tailwindcss(), locationEditor()], server: { proxy: { '/api': 'http://127.0.0.1:3001' } } })

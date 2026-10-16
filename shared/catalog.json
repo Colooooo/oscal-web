@@ -1,0 +1,14 @@
+{
+  "demo": true,
+  "currency": "UYU",
+  "products": [
+    { "id": "OSC-001", "name": "Osito de peluche", "category": "Juguetería", "description": "Un compañero suave para regalar y acompañar cada aventura. Producto ilustrativo de ejemplo.", "price": 490, "stock": 24, "art": "bear", "color": "#efdbd4" },
+    { "id": "OSC-002", "name": "Peluche compañero", "category": "Juguetería", "description": "Una idea para los más chicos. Modelo de muestra para explorar el catálogo.", "price": 690, "stock": 12, "art": "bear", "color": "#e8ded5" },
+    { "id": "OSC-003", "name": "Florero de cerámica", "category": "Bazar", "description": "Texturas cálidas para darle un detalle a tu espacio. Producto de ejemplo.", "price": 390, "stock": 18, "art": "vase", "color": "#ede5cc" },
+    { "id": "OSC-004", "name": "Set deco para el hogar", "category": "Bazar", "description": "Una selección ilustrativa de accesorios para decorar y regalar.", "price": 890, "stock": 8, "art": "vase", "color": "#e5e7d9" },
+    { "id": "OSC-005", "name": "Kit de útiles creativos", "category": "Artículos escolares", "description": "Ideas, apuntes y mucho color. Kit de muestra para el nuevo catálogo.", "price": 290, "stock": 40, "art": "pencils", "color": "#dfe7e9" },
+    { "id": "OSC-006", "name": "Set para dibujar", "category": "Artículos escolares", "description": "Un ejemplo de los productos para crear y aprender que vas a encontrar acá.", "price": 450, "stock": 20, "art": "pencils", "color": "#e2e0ed" },
+    { "id": "OSC-007", "name": "Kit de cumpleaños", "category": "Cotillón", "description": "Detalles para una mesa de fiesta. Conjunto ilustrativo de ejemplo.", "price": 590, "stock": 16, "art": "party", "color": "#e2e7d8" },
+    { "id": "OSC-008", "name": "Accesorios para celebrar", "category": "Cotillón", "description": "Un toque de alegría para festejar. Producto de muestra temporalmente agotado.", "price": 220, "stock": 0, "art": "party", "color": "#f1ded8" }
+  ]
+}

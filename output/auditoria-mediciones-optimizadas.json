@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-16T14:25:32.394Z",
+  "node": "v24.14.0",
+  "catalog": [
+    {
+      "products": 8,
+      "medianMs": 0.085,
+      "p95Ms": 0.103,
+      "jsonBytes": 1876,
+      "pageMedianMs": 0.169,
+      "pageJsonBytes": 2053
+    },
+    {
+      "products": 1000,
+      "medianMs": 3.971,
+      "p95Ms": 4.969,
+      "jsonBytes": 244933,
+      "pageMedianMs": 0.872,
+      "pageJsonBytes": 5973
+    },
+    {
+      "products": 5000,
+      "medianMs": 19.197,
+      "p95Ms": 21.847,
+      "jsonBytes": 1228933,
+      "pageMedianMs": 3.933,
+      "pageJsonBytes": 5974
+    }
+  ],
+  "http": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 712,
+      "elapsedMs": 64.91,
+      "headers": {
+        "content-type": "text/html",
+        "content-encoding": "gzip",
+        "cache-control": "no-cache",
+        "etag": "W/\"2c8-1a145191614\"",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self' https://tiles.openfreemap.org; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/assets/index-enGwtOXg.js",
+      "status": 200,
+      "bytes": 267026,
+      "elapsedMs": 8.45,
+      "headers": {
+        "content-type": "text/javascript",
+        "content-encoding": "gzip",
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "W/\"41312-1a1451915a9\"",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self' https://tiles.openfreemap.org; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/oscal-hero-1280.webp",
+      "status": 200,
+      "bytes": 51070,
+      "elapsedMs": 5.01,
+      "headers": {
+        "content-type": "image/webp",
+        "content-encoding": null,
+        "cache-control": "public, max-age=3600, must-revalidate",
+        "etag": "W/\"c77e-1a14510518a\"",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self' https://tiles.openfreemap.org; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200,
+      "bytes": 2053,
+      "elapsedMs": 13.44,
+      "headers": {
+        "content-type": "application/json",
+        "content-encoding": null,
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": "\"ac7de30edbe5e8d1821f4ddbf8794fe2b57480e9eb2648b1bfcd4a83b3027f01\"",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self' https://tiles.openfreemap.org; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/api/auth/session",
+      "status": 200,
+      "bytes": 13,
+      "elapsedMs": 15.34,
+      "headers": {
+        "content-type": "application/json",
+        "content-encoding": null,
+        "cache-control": "no-store",
+        "etag": null,
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self' https://tiles.openfreemap.org; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/api/orders/00000000-0000-0000-0000-000000000000",
+      "status": 404,
+      "bytes": 33,
+      "elapsedMs": 19.14,
+      "headers": {
+        "content-type": "application/json",
+        "content-encoding": null,
+        "cache-control": "no-store",
+        "etag": null,
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self' https://tiles.openfreemap.org; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+        "x-frame-options": "DENY",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    }
+  ],
+  "security": {
+    "hashConcurrencyBodyReaders": 5,
+    "hashConcurrencyAcceptedRegistrations": 4,
+    "distinctForwardedClients": 16,
+    "lastForwardedClientStatus": 400
+  }
+}

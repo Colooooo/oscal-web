@@ -1,0 +1,63 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { DatabaseSync } from 'node:sqlite'
+import { readFileSync } from 'node:fs'
+import { createApp } from './index.mjs'
+import { initializeCatalog, importCatalog } from './catalog.mjs'
+import { createHmac } from 'node:crypto'
+test('HTTP security, compression, cache invalidation, proxy isolation and private orders',async t=>{
+  const db=new DatabaseSync(':memory:')
+  db.exec('CREATE TABLE orders(id TEXT PRIMARY KEY,token TEXT,data TEXT,total INTEGER,status TEXT,preference TEXT,payment TEXT,created TEXT)')
+  initializeCatalog(db,JSON.parse(readFileSync(new URL('../shared/catalog.json',import.meta.url),'utf8')))
+  assert.throws(()=>createApp({db,env:{PUBLIC_URL:'https://audit.example'}}),/TRUSTED_PROXIES/)
+  const {server}=createApp({db,env:{PUBLIC_URL:'https://audit.example',TRUSTED_PROXIES:'127.0.0.1'}})
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve))
+  t.after(async()=>{await new Promise(resolve=>server.close(resolve));db.close()})
+  const base=`http://127.0.0.1:${server.address().port}`
+  const index=await fetch(base+'/')
+  assert.equal(index.headers.get('x-frame-options'),'DENY')
+  assert.match(index.headers.get('content-security-policy'),/frame-ancestors 'none'/)
+  assert.match(index.headers.get('strict-transport-security'),/31536000/)
+  const html=await index.text(), asset=html.match(/src="(\/assets\/[^\"]+\.js)"/)[1]
+  const js=await fetch(base+asset,{headers:{'Accept-Encoding':'br'}})
+  assert.equal(js.headers.get('content-encoding'),'br')
+  assert.match(js.headers.get('cache-control'),/immutable/)
+  assert.ok(Number(js.headers.get('content-length'))<150000)
+  assert.ok((await js.text()).length>Number(js.headers.get('content-length')))
+  const page=await fetch(base+'/api/catalog'),tag=page.headers.get('etag')
+  const data=await page.json()
+  assert.equal(data.products.length,8)
+  assert.equal((await fetch(base+'/api/catalog',{headers:{'If-None-Match':tag}})).status,304)
+  db.prepare('UPDATE inventory SET available=available-1 WHERE id=?').run(data.products[0].id)
+  const updated=await fetch(base+'/api/catalog',{headers:{'If-None-Match':tag}})
+  assert.equal(updated.status,200);assert.notEqual(updated.headers.get('etag'),tag)
+  for(let i=0;i<16;i++) {
+    const response=await fetch(base+'/api/auth/login',{method:'POST',headers:{Origin:'https://audit.example','Content-Type':'application/json','X-Real-IP':`192.0.2.${i+1}`},body:'{}'})
+    assert.equal(response.status,400)
+  }
+  assert.equal((await fetch(base+'/api/orders/00000000-0000-0000-0000-000000000000')).status,404)
+  assert.equal((await fetch(base+'/assets/not-found.js')).status,404)
+})
+test('webhook endpoint rejects unsigned events without contacting MP and deduplicates signed delivery',async t=>{
+  const db=new DatabaseSync(':memory:')
+  db.exec('CREATE TABLE orders(id TEXT PRIMARY KEY,token TEXT,data TEXT,total INTEGER,status TEXT,preference TEXT,payment TEXT,created TEXT)')
+  const seed=JSON.parse(readFileSync(new URL('../shared/catalog.json',import.meta.url),'utf8'))
+  initializeCatalog(db,seed)
+  importCatalog(db,{...seed,demo:false,products:seed.products.map(p=>({...p,published:true}))},{replace:true,resetStock:true})
+  const id='00000000-0000-0000-0000-000000000001'
+  db.prepare('INSERT INTO orders(id,token,data,total,status,created) VALUES(?,?,?,?,?,?)').run(id,'fixture','{}',490,'pending',new Date().toISOString())
+  let calls=0
+  const {server}=createApp({db,env:{PUBLIC_URL:'https://audit.example',TRUSTED_PROXIES:'127.0.0.1',PAYMENTS_ENABLED:'true',MERCADOPAGO_ACCESS_TOKEN:'fixture',MERCADOPAGO_WEBHOOK_SECRET:'fixture'},mp:async()=>{calls++;return {id:123,external_reference:id,transaction_amount:490,currency_id:'UYU',status:'approved',live_mode:false}}})
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve))
+  t.after(async()=>{await new Promise(resolve=>server.close(resolve));db.close()})
+  const url=`http://127.0.0.1:${server.address().port}/api/payments/webhook?data.id=123`
+  const body=JSON.stringify({type:'payment',data:{id:'123'}})
+  assert.equal((await fetch(url,{method:'POST',body})).status,401);assert.equal(calls,0)
+  const ts=String(Math.floor(Date.now()/1000)),request='signed-fixture'
+  const sig=createHmac('sha256','fixture').update(`id:123;request-id:${request};ts:${ts};`).digest('hex')
+  const headers={'x-signature':`ts=${ts},v1=${sig}`,'x-request-id':request,'content-type':'application/json'}
+  assert.equal((await fetch(url,{method:'POST',headers,body})).status,200)
+  assert.equal((await fetch(url,{method:'POST',headers,body})).status,200)
+  assert.equal(calls,1)
+  assert.equal(db.prepare('SELECT status FROM orders WHERE id=?').get(id).status,'approved')
+})

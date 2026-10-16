@@ -8,14 +8,21 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "export:logo": "node scripts/export-logo.mjs"
+    "export:logo": "node scripts/export-logo.mjs",
+    "api": "node --env-file-if-exists=.env server/index.mjs",
+    "test": "node --test server/*.test.mjs",
+    "catalog:import": "node scripts/import-catalog.mjs",
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "ops": "node --env-file-if-exists=.env scripts/operations.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",
     "@fontsource-variable/fraunces": "^5.3.0",
     "maplibre-gl": "^6.13.0",
+    "nodemailer": "^10.1.2",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -29,6 +36,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.6",
     "globals": "^17.12.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.69.0",

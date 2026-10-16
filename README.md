@@ -35,7 +35,7 @@ npm run preview
 
 Los datos de contacto y rubros se transcribieron de la fotografía proporcionada. Las ilustraciones son representativas; no constituyen un catálogo de productos reales. Confirmar con el cliente los textos comerciales antes de publicar. No se agregaron horarios ni precios sin información.
 
-Los botones de catálogo abren WhatsApp con un mensaje preparado. No hay PDF de catálogo ni backend conectado.
+La tienda ahora tiene catálogo de ejemplo, carrito persistente, checkout y backend preparado para Mercado Pago. Ver COMMERCE.md para ejecución, procedencia de componentes y requisitos de activación. Los cobros están desactivados mientras el catálogo sea de muestra.
 
 ## Ajustar la ubicación
 
@@ -44,4 +44,3 @@ Editá latitud y longitud en `src/config/location.json`. El mapa y los botones �
 El punto inicial (-34.8887889, -56.1813232) proviene de una consulta puntual de Arenal Grande 2178 en Nominatim/OpenStreetMap (nodo 944570068). Es la coordenada de la dirección; se puede afinar a la entrada real del local. No se solicita la ubicación personal del visitante. Los datos vectoriales de OpenFreeMap se cargan al entrar en la sección. El control de atribución visible está desactivado; antes de publicar, revisar el cumplimiento de las licencias de los datos. La rueda controla el zoom cuando el cursor está sobre el mapa; también se puede usar los botones o gestos táctiles. El diseño omite edificios, comercios y números de puerta para mantener una cartografía mínima y legible.
 
 Referencias: [zoom de MapLibre](https://maplibre.org/maplibre-gl-js/docs/API/classes/ScrollZoomHandler/), [OpenFreeMap y MapLibre](https://openfreemap.org/quick_start/), [dirección en OpenStreetMap](https://www.openstreetmap.org/node/944570068).
-

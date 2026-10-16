@@ -1,0 +1,18 @@
+{
+  "demo": false,
+  "currency": "UYU",
+  "source": "catalogo-pendiente.pdf",
+  "products": [
+    {
+      "id": "REFERENCIA-PDF-001",
+      "name": "Ejemplo de formato: reemplazar con nombre real",
+      "category": "Rubro del PDF",
+      "description": "Reemplazar con descripción real; este archivo es solo una plantilla, no importar a producción.",
+      "price": 100,
+      "stock": 0,
+      "image": "",
+      "published": false,
+      "sourcePage": 1
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "date": "2026-10-16T14:04:09.403Z",
+  "node": "v24.14.0",
+  "catalog": [
+    {
+      "products": 8,
+      "medianMs": 0.085,
+      "p95Ms": 0.106,
+      "jsonBytes": 1876
+    },
+    {
+      "products": 1000,
+      "medianMs": 4.033,
+      "p95Ms": 4.969,
+      "jsonBytes": 244933
+    },
+    {
+      "products": 5000,
+      "medianMs": 16.424,
+      "p95Ms": 19.568,
+      "jsonBytes": 1228933
+    }
+  ],
+  "http": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 712,
+      "elapsedMs": 42.85,
+      "headers": {
+        "content-type": "text/html",
+        "content-encoding": null,
+        "cache-control": null,
+        "etag": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "referrer-policy": null,
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/assets/index-COz3XDHx.js",
+      "status": 200,
+      "bytes": 319126,
+      "elapsedMs": 5.92,
+      "headers": {
+        "content-type": "text/javascript",
+        "content-encoding": null,
+        "cache-control": null,
+        "etag": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "referrer-policy": null,
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/oscal-hero-background.jpg",
+      "status": 200,
+      "bytes": 1882337,
+      "elapsedMs": 13.31,
+      "headers": {
+        "content-type": "image/jpeg",
+        "content-encoding": null,
+        "cache-control": null,
+        "etag": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "referrer-policy": null,
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/api/catalog",
+      "status": 200,
+      "bytes": 1876,
+      "elapsedMs": 2.88,
+      "headers": {
+        "content-type": "application/json",
+        "content-encoding": null,
+        "cache-control": "no-store",
+        "etag": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "referrer-policy": null,
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/api/auth/session",
+      "status": 200,
+      "bytes": 13,
+      "elapsedMs": 2.03,
+      "headers": {
+        "content-type": "application/json",
+        "content-encoding": null,
+        "cache-control": "no-store",
+        "etag": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "referrer-policy": null,
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "path": "/api/orders/00000000-0000-0000-0000-000000000000",
+      "status": 404,
+      "bytes": 33,
+      "elapsedMs": 1.86,
+      "headers": {
+        "content-type": "application/json",
+        "content-encoding": null,
+        "cache-control": "no-store",
+        "etag": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "referrer-policy": null,
+        "strict-transport-security": null,
+        "x-content-type-options": "nosniff"
+      }
+    }
+  ],
+  "security": {
+    "hashConcurrencyBodyReaders": 5,
+    "hashConcurrencyAcceptedRegistrations": 5,
+    "distinctForwardedClients": 16,
+    "lastForwardedClientStatus": 429
+  }
+}

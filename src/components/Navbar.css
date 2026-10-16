@@ -42,3 +42,6 @@
 }
 @media (max-width: 380px) { .navbar-catalog { display: none; } }
 
+
+@media (max-width: 380px) { .navbar .navbar-catalog { display: inline-flex; padding-left: 12px; gap: 6px; } .navbar-catalog-icon { display: none; } .navbar { gap: 8px; } }
+
