@@ -1,6 +1,16 @@
 # Tienda Oscal
 
+## Neon / PostgreSQL
+
+La API usa PostgreSQL cuando `DATABASE_URL` está configurada y SQLite local cuando está vacía. La configuración de desarrollo está en `.env.local` (ignorado por Git), conectada a la rama `development` del proyecto **Oscal SRL Importaciones**. La API, las importaciones y las operaciones leen ese archivo.
+
+Ejecutar `npm run db:migrate` para aplicar las migraciones con `DATABASE_URL_UNPOOLED`; `npm run db:check` verifica el catálogo y `npm run test:postgres` comprueba cuentas, sesiones, pedidos y reservas revirtiendo sus datos de prueba. La conexión agrupada `DATABASE_URL` se usa para el tráfico normal de la API. Las referencias a archivos SQLite y a `server/data` más abajo solo aplican al modo local sin Neon.
+
+Con PostgreSQL los backups se hacen con `npm run ops -- backup`, que requiere `pg_dump` compatible con PostgreSQL 18 y guarda un archivo `.dump`. Restaurarlo con `pg_restore` en una base de prueba independiente antes de usarlo como respaldo operativo. `check-backup` sigue siendo exclusivamente para snapshots SQLite. Las credenciales de Neon son privadas del servidor y nunca llevan prefijo `VITE_`.
+
 ## Probar localmente
+
+En Vercel la API se publica desde `api/index.mjs`; no se ejecuta `npm run api`. Configurar `DATABASE_URL` de la rama `production`, `PUBLIC_URL=https://oscal-pink.vercel.app` y `PAYMENTS_ENABLED=false` en las variables del proyecto y desplegar el código actualizado. Ver los pasos completos en `README.md`. El mantenimiento de reservas con `setInterval` pertenece al servidor local: antes de habilitar pagos en Vercel, programar la conciliación desde un servicio externo.
 
 - `npm run dev`: landing y tienda en http://localhost:5173.
 - `npm run api`, en otra terminal: servidor de pedidos en 127.0.0.1:3001. Vite deriva `/api` a este servidor.

@@ -1,0 +1,6 @@
+.env*
+server/data/
+server/backups/
+output/
+**/*.test.mjs
+.git/

@@ -28,3 +28,4 @@ server/data/
 *.sw?
 
 server/backups/
+.vercel/

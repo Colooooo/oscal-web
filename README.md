@@ -9,7 +9,55 @@ npm install
 npm run dev
 ```
 
+La tienda necesita también la API: ejecutar `npm run api` en otra terminal.
+
+### Base de datos Neon
+
+La configuración privada vive en `.env.local`, excluido de Git. Los comandos de la API leen primero `.env` y luego `.env.local`. `DATABASE_URL` conecta el servidor a PostgreSQL mediante el pool de Neon; `DATABASE_URL_UNPOOLED` se usa para migraciones y backups. Nunca usar el prefijo `VITE_` para estas conexiones.
+
+El proyecto es **Oscal SRL Importaciones**, ID `wandering-mud-45739368`, región São Paulo. El entorno local usa la rama **development** (`br-crimson-pond-b65ri4wy`); producción se configura por separado en el alojamiento. Las cuentas y sesiones existentes de la aplicación siguen gestionadas por la API de Oscal.
+
+```sh
+npm run db:migrate
+npm run db:check
+npm run test:postgres
+```
+
+Las migraciones se registran en `oscal_migrations` y se ejecutan una sola vez. Las pruebas PostgreSQL solo se habilitan con `NEON_BRANCH_NAME=development` y revierten sus datos al finalizar. Los pagos permanecen desactivados y el catálogo inicial contiene ocho ejemplos.
+
+Sin `DATABASE_URL`, la API conserva el modo SQLite local. Para volver a ese modo, quitar las variables de conexión de `.env.local`. La copia inicial a Neon incluye la cuenta y los tres pedidos existentes, junto con catálogo e inventario. Se conserva un snapshot consistente en `server/backups/before-neon-*.sqlite`; la base SQLite original permanece intacta.
+
+Para trasladar otra base SQLite a un entorno Neon nuevo, ejecutar `npm run db:import-sqlite` para revisar los conteos y `npm run db:import-sqlite -- --apply` para copiar. El script crea un backup, compara cada registro en destino y revierte toda la operación ante diferencias. Rechaza destinos con cuentas o pedidos para evitar sobrescribir datos.
+
 ## Validación y producción
+
+### Vercel
+
+`api/index.mjs` exporta la API como función Node 24. `vercel.json` envía `/api/*` a esa función y resuelve las rutas de React mediante `index.html`; los archivos estáticos se sirven desde `dist`. El pool PostgreSQL se reutiliza entre solicitudes y se integra con Fluid Compute. La región configurada es São Paulo (`gru1`), junto a la base Neon.
+
+En el proyecto Vercel de `https://oscal-pink.vercel.app`, configurar estas variables en **Settings → Environment Variables → Production** y desplegar la versión actual del código:
+
+| Variable | Valor |
+| --- | --- |
+| `DATABASE_URL` | Conexión con pool de la rama Neon **production**, guardada en `.env.production.local`. |
+| `PUBLIC_URL` | `https://oscal-pink.vercel.app` |
+| `PAYMENTS_ENABLED` | `false` |
+| `MERCADOPAGO_MODE` | `test` |
+
+Las variables de Production y Preview se configuran por separado. Para previews usar una rama Neon independiente; el origen autorizado se obtiene de `VERCEL_URL`, mientras que producción utiliza `PUBLIC_URL`. No subir los archivos `.env*` ni establecer estas conexiones con prefijo `VITE_`. Las variables de Vercel se aplican a nuevos despliegues; después de cambiarlas, desplegar nuevamente.
+
+La rama Neon `production` (`br-patient-sunset-b6m4g3g3`) ya tiene el esquema y la copia verificada de la cuenta, los tres pedidos y los ocho productos locales. El archivo `.env.production.local` contiene sus conexiones privadas, separado del entorno local `development`. Las migraciones se ejecutan explícitamente con la conexión directa, antes de publicar:
+
+```sh
+node --env-file=.env.production.local scripts/migrate-postgres.mjs
+node --env-file=.env.production.local scripts/check-database.mjs
+```
+
+Comprobar tras el despliegue: `/catalogo` y `/ingresar` deben abrir directamente; `/api/catalog` debe devolver JSON, `/api/auth/session` debe devolver `{ "user": null }` sin sesión y `/api/payments/config` debe informar `enabled: false`. Probar el ingreso con la cuenta migrada.
+
+En Vercel, `DATABASE_URL` es obligatoria y nunca se crea un archivo SQLite. La IP se toma de la cabecera de Vercel `x-vercel-forwarded-for`; no se necesita `TRUSTED_PROXIES`. La verificación y recuperación por correo requieren las variables `SMTP_*`; el envío se registra mediante `waitUntil` para completar la tarea después de responder. El mantenimiento periódico de reservas del servidor local no se ejecuta en una función: antes de habilitar pagos debe configurarse su ejecución programada o una operación externa de conciliación.
+
+Referencias: [funciones Node](https://vercel.com/docs/functions/runtimes/node-js), [pool y tareas posteriores a la respuesta](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package), [cabeceras de IP](https://vercel.com/docs/headers/request-headers).
 
 ```sh
 npm run lint
