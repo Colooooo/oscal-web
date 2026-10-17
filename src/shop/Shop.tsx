@@ -15,13 +15,12 @@ const field = 'mt-2 w-full rounded-xl border border-[#292d4b25] bg-white px-4 py
 const title = 'text-4xl font-medium tracking-[-.05em] sm:text-6xl'
 
 export function ShopLayout() {
-  const { demo, initialLoading: loading, error, reload } = useCatalog()
+  const { initialLoading: loading, error, reload } = useCatalog()
   const { notice } = useCart()
   const { pathname } = useLocation()
   const heading = useRef<HTMLElement>(null)
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); heading.current?.focus({ preventScroll: true }) }, [pathname])
   return <><ShopHeader/><main ref={heading} tabIndex={-1} className="shop mx-auto min-h-[85svh] max-w-7xl px-5 pt-6 pb-20 outline-none sm:px-10">
-    {demo && <div className="mb-6 flex flex-wrap items-center justify-between gap-1 border-b border-[#292d4b10] pb-3 text-[10px] text-[#72737e]"><strong>Catálogo de muestra</strong><span>Productos, precios y stock de ejemplo. No se realizan cobros.</span></div>}
     {['/catalogo', '/carrito', '/checkout'].includes(pathname) && (loading || error) ? <div className="py-20 text-center" role="status">{loading ? 'Cargando catálogo…' : <><p>{error}</p><button className="mt-5 underline" onClick={reload}>Reintentar</button></>}</div> : <Outlet/>}
     <p role="status" className="sr-only">{notice}</p>
   </main><footer className="border-t border-[#292d4b15] px-6 py-8 text-center text-xs text-[#72737e]">Oscal Importaciones · Arenal Grande 2178, Montevideo · <Link to="/">Volver al inicio</Link></footer></>
